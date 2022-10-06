@@ -1,15 +1,14 @@
 # Tensor
 
-Final variant
-
-Tensor - array of Tensors, except rank-0 Tensor (scalar)
-
+### Tensor - array of Tensors, except rank-0 Tensor (scalar)
+---
 [Tensor, Tensor, Tensor, Tensor]
    |       |       |       |
    |       |     [...]   [...]
    |  [Tensor, Tensor, ...]
 [Tensor, Tensor...]
- 
+---
+### Generics
 Не получается писать дженерики.
 Есть проблема с дженериками в функциях, например:
 как понимать какого типа будет результирующая матрица;
@@ -17,9 +16,11 @@ Tensor - array of Tensors, except rank-0 Tensor (scalar)
 
 В этой реализации, как и в JS, все числа(скаляры) - float значения.
 
+### Scalars
 Tensor - scalar, только если dims = [],
 но [1], [1, 1], [1, 1, 1]... не будут являться скалярами.
 
+### Nulls
 В оригинальном варианте объявление Tensor-а - сложная операция, при создании обходится каждый элемент.
 Хотелось сделать так, чтобы если тензор под индексом не затрагивается, то по умолчанию он null.
 Для этого надо было дополнительно как-то модифицировать get/set, fill, toString,
@@ -27,8 +28,8 @@ Tensor - scalar, только если dims = [],
     new Tensor().getScalar()/setScalar(),
     либо в связке с get - tensor.get(0).getScalar()/setScalar()
 
-Example of usage: 
-
+### Example of usage: 
+```
 int     rows = 2, 
         cols = 3, 
         channels = 3;
@@ -44,3 +45,4 @@ for(int d=0, v=0; d<channels; d++){
 }
 
 System.out.print(t);
+```
