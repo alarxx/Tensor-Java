@@ -28,7 +28,7 @@ import static Tensor.Core.throwError;
  *
  * В оригинальном варианте объявление Tensor-а - сложная операция, при создании обходится каждый элемент.
  * Хотелось сделать так, чтобы если тензор под индексом не затрагивается, то по умолчанию он null.
- * Для этого надо было дополнительно как-то модифицировать get/set, fill, toString,
+ * Для этого надо было добавить проверку на null в get/set, fill, toString,
  * а методы getScalar/setScalar не нуждаются в такой проверке:
  *      new Tensor().getScalar()/setScalar(),
  *      либо в связке с get - tensor.get(0).getScalar()/setScalar()
@@ -44,14 +44,15 @@ public class Tensor implements TensorInterface, Iterable<Tensor> {
     private float scalar; //by default is zero
     private boolean isScalar = false;
 
+    // Нужен для создания вложенных тензоров
+    // Без геттеров сеттеров, используется только внутри класса
     private int[] subDims;
 
 
-    // Думаю, всегда будет false, поэтому закрываю конструктор
-    private Tensor(boolean fullDeclaration, int ... dims){
+    public Tensor(int ... dims){
         setDims(dims);
 
-        if(dims.length == 0) {
+        if(dims.length == 0) { // scalar
             setLength(0);
             setIsScalar(true);
             setScalar(INIT_VALUE);
@@ -59,23 +60,19 @@ public class Tensor implements TensorInterface, Iterable<Tensor> {
         else {
             setLength(dims[0]);
 
+            this.subDims = Arrays.copyOfRange(dims, 1, dims.length);
+
             array = new Tensor[getLength()];
 
-            if(fullDeclaration) {
-                int[] subDims = Arrays.copyOfRange(dims, 1, dims.length);
-                for (int i = 0; i < getLength(); i++) {
-                    array[i] = new Tensor(subDims); // recursion
-                }
-            }
-            else{
-                this.subDims = Arrays.copyOfRange(dims, 1, dims.length);
-            }
+//            for (int i = 0; i < getLength(); i++) {
+//                array[i] = new Tensor(subDims); // recursion
+//            }
 
+//            Оптимизирован с помощью
+//            if(array[id] == null){
+//                array[id] = new Tensor(subDims);;
+//            }
         }
-    }
-
-    public Tensor(int ... dims){
-        this(false, dims);
     }
 
 
