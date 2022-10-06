@@ -28,7 +28,7 @@ Tensor - scalar, только если dims = [],
 при создании обходится каждый элемент.  
 Хотелось сделать так, чтобы если тензор под индексом не  
 затрагивается, то по умолчанию он null.  
-Для этого надо было дополнительно как-то модифицировать get/set, fill, toString,  
+Для этого надо было было добавить проверку на null в get/set, fill, toString,  
 а методы getScalar/setScalar не нуждаются в такой проверке:  
     new Tensor().getScalar()/setScalar(),  
     либо в связке с get - tensor.get(0).getScalar()/setScalar()  
