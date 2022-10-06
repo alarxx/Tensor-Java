@@ -1,15 +1,17 @@
 # Tensor
 
 ### Tensor - array of Tensors, except rank-0 Tensor (scalar)
----
-
-[Tensor, Tensor, Tensor, Tensor]
-   |       |       |       |
-   |       |     [...]   [...]
-   |  [Tensor, Tensor, ...]
-[Tensor, Tensor...]
 
 ---
+
+[Tensor, Tensor, Tensor, Tensor]  
+   |       |       |       |  
+   |       |     [...]   [...]  
+   |  [Tensor, Tensor, ...]  
+[Tensor, Tensor...]  
+
+---
+
 ### Generics
 Не получается писать дженерики.
 Есть проблема с дженериками в функциях, например:
