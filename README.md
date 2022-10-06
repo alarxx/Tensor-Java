@@ -18,10 +18,12 @@
 
 В этой реализации, как и в JS, все числа(скаляры) - float значения.  
 
+---
 ### Scalars
 Tensor - scalar, только если dims = [],  
 но [1], [1, 1], [1, 1, 1]... не будут являться скалярами.  
 
+---
 ### Nulls
 В первом варианте объявление Tensor-а - сложная операция,  
 при создании обходится каждый элемент.  
@@ -32,6 +34,7 @@ Tensor - scalar, только если dims = [],
     new Tensor().getScalar()/setScalar(),  
     либо в связке с get - tensor.get(0).getScalar()/setScalar()  
 
+---
 ### Example of usage: 
 ```
 int     rows = 2, 
