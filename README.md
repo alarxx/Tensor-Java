@@ -1,6 +1,6 @@
 # Tensor
 
-### Tensor - array of Tensors, except rank-0 Tensor (scalar)
+## Tensor - array of Tensors, except rank-0 Tensor (scalar)
 ---
 ```
 [Tensor, Tensor, Tensor, Tensor]  
