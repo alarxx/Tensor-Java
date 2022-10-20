@@ -1,4 +1,4 @@
-# Tensor in plain java
+# Tensor
 
 ## Tensor - array of Tensors, except rank-0 Tensor (scalar)
 ```
